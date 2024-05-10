@@ -33,9 +33,9 @@ npm run dev
 
 ## Deployment
 
-This application will be deployed using Vercel at the following link:
+This application was deployed using Vercel at the following link:
 
-[summary-texts-ai](...)
+[summary-texts-ai](https://summary-texts-ai.vercel.app/)
 
 ## Technologies Used
 
