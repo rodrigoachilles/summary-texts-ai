@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import { styled } from "@mui/material/styles";
 import {
   TextField,
   Button,
@@ -12,8 +11,10 @@ import {
   Toolbar,
   useMediaQuery,
   Alert,
+  makeStyles,
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import Image from "next/image";
 
 interface HistoryItem {
   input: string;
@@ -56,7 +57,10 @@ const IndexPage: React.FC = () => {
 
       const data = await response.json();
       setOutputText(data.summary);
-      setHistory([{ input: shortText(inputText), summary: shortText(data.summary) }, ...history]);
+      setHistory([
+        { input: shortText(inputText), summary: shortText(data.summary) },
+        ...history,
+      ]);
     } catch (error) {
       setMessageError(`Error summarizing text: ${error}`);
     } finally {
@@ -66,10 +70,10 @@ const IndexPage: React.FC = () => {
   };
 
   const shortText = (text: string) => {
-      var first100 = text.slice(0, 100);
-      var rest = text.length > 100 ? "..." : "";
-      return first100 + rest;
-  }
+    var first100 = text.slice(0, 100);
+    var rest = text.length > 100 ? "..." : "";
+    return first100 + rest;
+  };
 
   const clearHistory = () => {
     setHistory([]);
@@ -80,6 +84,13 @@ const IndexPage: React.FC = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
+            <Image
+              src="/summary-texts-icon.svg"
+              alt="Summary Texts Logo"
+              width={100}
+              height={24}
+              priority
+            />
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Summarizer Texts in Gemini
             </Typography>
