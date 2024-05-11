@@ -1,3 +1,6 @@
+"use client";
+
+import styles from "./page.module.css";
 import React, { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import {
@@ -23,7 +26,7 @@ interface HistoryItem {
 
 const URL = "/api/summarize";
 
-const IndexPage: React.FC = () => {
+export default function Home() {
   const [messageError, setMessageError] = useState<string>("");
   const [inputText, setInputText] = useState<string>("");
   const [outputText, setOutputText] = useState<string>("");
@@ -80,30 +83,30 @@ const IndexPage: React.FC = () => {
   };
 
   return (
-    <Container disableGutters={useMediaQuery(theme.breakpoints.only("xs"))}>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <Image
-              src="/summary-texts-icon.svg"
-              alt="Summary Texts Logo"
-              width={100}
-              height={24}
-              priority
-            />
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Summarizer Texts in Gemini
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </Box>
+    <main className={styles.main}>
+      <AppBar position="static">
+        <Toolbar>
+          <Image
+            src="/summary-texts-icon.svg"
+            alt="Summary Texts Logo"
+            width={100}
+            height={24}
+            className="dark:invert"
+            priority
+          />
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Summarizer Texts in Gemini
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <br />
       {messageError ? (
         <Alert variant="filled" severity="error">
           {messageError}
         </Alert>
       ) : null}
-      <Container maxWidth="xl" style={{ display: "flex" }}>
+      <br />
+      <Container style={{ display: "flex" }}>
         <Box width="40%" p={2} borderRight="1px solid #ccc">
           <Typography variant="h5" gutterBottom>
             History
@@ -161,8 +164,6 @@ const IndexPage: React.FC = () => {
           </Box>
         </Box>
       </Container>
-    </Container>
+    </main>
   );
-};
-
-export default IndexPage;
+}
